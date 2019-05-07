@@ -17,8 +17,8 @@ ingredients:
   script:
     # Instead of the next two lines, use for Travis CI pipeline builds instead:
     # cp vscode/.build/linux/deb/amd64/deb/*.deb .
-    - DLD=$(wget -q "https://github.com/VSCodium/vscodium/releases" -O - | grep amd64.deb | grep "releases/download" | cut -d '"' -f 2 | head -n 1)
-    - wget -c "https://github.com/$DLD"
+    - DLD=$(wget -q "https://api.github.com/repos/VSCodium/vscodium/releases/latest" -O - | grep -E "https.*amd64.deb\"" | cut -d'"' -f4)
+    - wget -c "$DLD"
     - ls vscodium_*.deb | cut -d _ -f 2 > VERSION
 
 script:
